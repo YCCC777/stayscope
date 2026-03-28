@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayScope 設定</title>
+  <link rel="stylesheet" href="settings.css">
+</head>
+<body>
+  <div id="app">
+
+    <header id="header">
+      <button id="btn-back" class="back-btn">←</button>
+      <span id="header-title">⚙️ 設定</span>
+    </header>
+
+    <main id="main">
+
+      <!-- 介面語言 -->
+      <section class="settings-section">
+        <h2 class="section-title" data-i18n="settings_lang">介面語言</h2>
+        <select id="select-lang" class="settings-select">
+          <option value="zh-TW">繁體中文</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="en">English</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="th">ภาษาไทย</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="id">Bahasa Indonesia</option>
+          <option value="ms">Bahasa Melayu</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+        </select>
+      </section>
+
+      <!-- 預設搜尋半徑 -->
+      <section class="settings-section">
+        <h2 class="section-title" data-i18n="settings_radius">預設搜尋半徑</h2>
+        <div class="radio-group" id="radius-group">
+          <label class="radio-item">
+            <input type="radio" name="radius" value="17"> 500m
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="radius" value="15" checked> 1km
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="radius" value="14"> 2km
+          </label>
+          <label class="radio-item">
+            <input type="radio" name="radius" value="13"> 5km
+          </label>
+        </div>
+      </section>
+
+      <!-- 自訂類別 -->
+      <section class="settings-section">
+        <div class="section-header">
+          <h2 class="section-title" data-i18n="settings_custom_cats">自訂類別</h2>
+          <button id="btn-add-cat" class="add-btn">+ <span data-i18n="settings_add_cat">新增類別</span></button>
+        </div>
+        <div id="custom-cats-list"></div>
+        <p id="custom-cats-hint" class="hint-text" data-i18n="settings_custom_hint">新增後，⚙️ 自訂模式將顯示這些類別</p>
+      </section>
+
+      <!-- 資料管理 -->
+      <section class="settings-section">
+        <h2 class="section-title">資料管理</h2>
+        <div class="data-btns">
+          <button id="btn-export-all" class="data-btn">📤 <span data-i18n="settings_export">匯出全部資料</span></button>
+          <button id="btn-import-all" class="data-btn">📥 <span data-i18n="settings_import">匯入資料</span></button>
+          <input type="file" id="import-all-input" accept=".json" style="display:none">
+          <button id="btn-clear-all" class="data-btn danger">🗑️ <span data-i18n="settings_clear">清除所有資料</span></button>
+        </div>
+      </section>
+
+      <!-- 版本資訊 -->
+      <section class="settings-section about-section">
+        <div class="about-logo"><img src="imag/Stayscope.png" alt="StayScope" width="56" height="56" style="border-radius:12px;"></div>
+        <div class="about-name">StayScope</div>
+        <div class="about-version">v1.3.0 · VRBO &amp; Trip.com Edition</div>
+        <div class="about-desc"><span data-i18n="donate_tagline">住宿周遷地段分析工具</span><br>Made by Risa Studio</div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="i18n/locales.js"></script>
+  <script src="lib/storage.js"></script>
+  <script src="settings.js"></script>
+</body>
+</html>

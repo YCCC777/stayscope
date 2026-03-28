@@ -1,0 +1,1334 @@
+﻿/* ============================================================
+   Airbnb ?��??�人 ??Popup Styles
+   Dark mode · 360px fixed width · Airbnb coral accent
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg:         #1C1C1E;
+  --surface:    #2C2C2E;
+  --surface-2:  #3A3A3C;
+  --accent:     #FF7A7F;
+  --accent-dim: rgba(255, 122, 127, 0.14);
+  --accent-mid: rgba(255, 122, 127, 0.28);
+  /* ?�能?��?�?屬色 */
+  --gold:       #FFD60A;
+  --gold-dim:   rgba(255, 214, 10, 0.14);
+  --gold-mid:   rgba(255, 214, 10, 0.28);
+  --blue:       #5AC8FA;
+  --blue-dim:   rgba(90, 200, 250, 0.12);
+  --green:      #30D158;
+  --green-dim:  rgba(48, 209, 88, 0.12);
+  --safety:     #FF9F0A;
+  --safety-dim: rgba(255, 159, 10, 0.14);
+  --text-1:     #F5F5F7;
+  --text-2:     #C0C0C4;
+  --text-3:     #8E8E93;
+  --success:    #34C759;
+  --warn:       #FF9F0A;
+  --border:     rgba(255, 255, 255, 0.12);
+  --r-sm:       8px;
+  --r-md:       12px;
+}
+
+html, body {
+  width: 380px;
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans TC', 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---- Header ---- */
+#header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 16px 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+#header-icon { font-size: 18px; }
+
+#header-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--text-1);
+}
+
+/* ---- Info Section ---- */
+#info-section {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Status bar */
+#status-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  font-size: 13px;
+  color: var(--text-2);
+}
+.status-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.detected-name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-left: 16px;
+  max-width: 100%;
+}
+.state-detecting .detected-name,
+.state-error    .detected-name { display: none !important; }
+
+#status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.state-detecting #status-dot {
+  background: var(--warn);
+  animation: blink 1.4s ease-in-out infinite;
+}
+.state-success  #status-dot { background: var(--success); }
+.state-error    #status-dot { background: var(--accent); }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.25; }
+}
+
+/* Property info (country + coords) */
+#property-info {
+  margin-top: 10px;
+}
+
+#country-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-1);
+  letter-spacing: -0.015em;
+}
+
+#country-flag { font-size: 20px; }
+
+#coord-row {
+  margin-top: 3px;
+  font-size: 11.5px;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.coord-sep { color: var(--text-3); }
+
+/* 座�?�?-> 點�??��???Google Maps ?��?大頭??*/
+.pin-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 6px;
+  padding: 5px 9px 5px 7px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-2);
+  letter-spacing: 0.03em;
+  width: 100%;
+  text-align: left;
+  transition: background 0.14s, border-color 0.14s, transform 0.1s;
+}
+
+.pin-btn:hover {
+  background: var(--surface-2);
+  border-color: rgba(255, 255, 255, 0.16);
+  color: var(--text-1);
+}
+
+.pin-btn:active { transform: scale(0.97); }
+
+.pin-icon { font-size: 14px; flex-shrink: 0; }
+
+.pin-badge {
+  margin-left: auto;
+  font-size: 10px;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+/* ?��?以房源為中�? ?�示�?*/
+.map-hint {
+  background: var(--accent-dim);
+  border-radius: var(--r-sm);
+  padding: 5px 10px;
+  margin-bottom: 4px;
+}
+
+#label-map-center {
+  font-size: 10.5px;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ---- Search Sections ---- */
+#search-sections {
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.group-label {
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-3);
+  margin-bottom: 9px;
+}
+
+/* Featured group: accent-coloured label */
+.group.featured .group-label {
+  color: var(--accent);
+}
+
+/* Bundle buttons (3-col grid, tall card style) */
+.bundle-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 7px;
+}
+
+.btn-bundle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  padding: 11px 10px 10px;
+  background: var(--accent-dim);
+  border: 1px solid rgba(255, 122, 127, 0.25);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-1);
+  transition: background 0.14s, border-color 0.14s, transform 0.1s;
+}
+
+.btn-bundle:hover {
+  background: var(--accent-mid);
+  border-color: rgba(255, 122, 127, 0.45);
+}
+
+.btn-bundle:active { transform: scale(0.96); }
+
+/* 安全套�??��? */
+.btn-bundle-safety {
+  background: var(--safety-dim);
+  border-color: rgba(255, 159, 10, 0.3);
+}
+.btn-bundle-safety:hover {
+  background: rgba(255, 159, 10, 0.25);
+  border-color: rgba(255, 159, 10, 0.5);
+}
+.btn-bundle-safety .bundle-name { color: var(--safety); }
+
+.bundle-icon {
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+
+.bundle-name {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.bundle-hint {
+  font-size: 10px;
+  color: var(--text-2);
+  line-height: 1.3;
+}
+
+/* Category buttons (4-col grid) */
+.cat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.btn-cat {
+  padding: 9px 12px 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 12px;
+  color: var(--text-1);
+  text-align: left;
+  transition: background 0.14s, border-color 0.14s, transform 0.1s;
+}
+
+.btn-cat:hover {
+  background: var(--surface-2);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.btn-cat:active { transform: scale(0.94); }
+
+/* ---- 自訂類別空狀態 CTA ---- */
+.btn-custom-cta {
+  width: 100%;
+  padding: 9px 14px;
+  border-radius: 10px;
+  border: 1.5px dashed rgba(255, 122, 127, 0.45);
+  background: transparent;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn-custom-cta:hover {
+  background: rgba(255, 122, 127, 0.08);
+  border-color: rgba(255, 122, 127, 0.8);
+}
+
+/* ---- 價格展示列 ---- */
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 14px 5px;
+  font-size: 12px;
+}
+
+.price-display {
+  color: var(--text-1);
+  font-weight: 600;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+
+.price-delta {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 6px;
+}
+.price-delta.up   { color: #FF453A; background: rgba(255, 69, 58, 0.12); }
+.price-delta.down { color: #30D158; background: rgba(48, 209, 88, 0.12); }
+.price-delta.same { color: var(--text-3); background: rgba(255,255,255,0.06); }
+
+
+#not-listing {
+  padding: 30px 16px 24px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 38px;
+  opacity: 0.4;
+}
+
+.empty-state p {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.6;
+  max-width: 240px;
+}
+
+/* 平台圖示列 */
+.platform-hint {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.ph-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border: 1px solid;
+}
+
+.ph-airbnb  { color: #FF5A5F; border-color: rgba(255,90,95,0.4);  background: rgba(255,90,95,0.08); }
+.ph-booking { color: #003580; border-color: rgba(0,106,198,0.4);  background: rgba(0,106,198,0.12); }
+.ph-agoda   { color: #E32836; border-color: rgba(227,40,54,0.4);  background: rgba(227,40,54,0.08); }
+.ph-vrbo    { color: #1854CC; border-color: rgba(24,84,204,0.4);  background: rgba(24,84,204,0.12); }
+.ph-trip    { color: #1785D4; border-color: rgba(23,133,212,0.4); background: rgba(23,133,212,0.10); }
+
+/* ---- Footer （共?��? ---- */
+#footer {
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid rgba(255,122,127,0.18);
+  background: var(--surface-2);
+  flex-shrink: 0;
+}
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 32px;
+  text-decoration: none;
+  gap: 2px;
+  cursor: pointer;
+  border-radius: var(--r-sm);
+  transition: background 0.14s;
+}
+.footer-brand:hover { background: rgba(255,122,127,0.10); }
+
+.footer-brand-main {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-1);
+  letter-spacing: 0.01em;
+}
+
+.footer-brand-sub {
+  font-size: 9px;
+  color: var(--text-3);
+  letter-spacing: 0.03em;
+}
+
+.footer-spacer { flex: 1; }
+
+/* ---- Utility ---- */
+.hidden { display: none !important; }
+
+/* ============================================================
+   P2: ?�籤 / ?��? / 比�?
+   ============================================================ */
+
+/* ---- Tab Bar ---- */
+#tab-bar {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 9px 4px 8px;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-3);
+  letter-spacing: 0.01em;
+  transition: color 0.14s, border-color 0.14s;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab-btn:hover { color: var(--text-2); }
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ---- Tab Panes ---- */
+.tab-pane { display: none; flex-direction: column; }
+.tab-pane.active { display: flex; }
+
+/* ?��?窗格??info-section ?��? */
+#pane-search #info-section {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ---- Source Badge (Airbnb / Booking / Agoda) ---- */
+.source-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--surface-2);
+  color: var(--text-2);
+  letter-spacing: 0.04em;
+}
+
+/* ---- Save Button ---- */
+.save-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 7px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+  text-align: center;
+  transition: background 0.14s, border-color 0.14s, color 0.14s, transform 0.1s;
+}
+
+.save-btn:hover {
+  background: var(--surface-2);
+  color: var(--text-1);
+}
+
+.save-btn:active { transform: scale(0.97); }
+
+.save-btn.is-saved {
+  background: rgba(255, 214, 10, 0.12);
+  border-color: rgba(255, 214, 10, 0.35);
+  color: #FFD60A;
+}
+
+/* ---- Save Row (Save + Hotels) ---- */
+.save-row {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.save-row .save-btn {
+  flex: 1;
+  width: auto;
+  margin-top: 0;
+}
+.hotels-btn {
+  flex-shrink: 0;
+  padding: 7px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: #0A84FF;
+  white-space: nowrap;
+  transition: background 0.14s, color 0.14s, border-color 0.14s, transform 0.1s;
+}
+.hotels-btn:hover {
+  background: rgba(10, 132, 255, 0.1);
+  border-color: rgba(10, 132, 255, 0.35);
+}
+.hotels-btn:active { transform: scale(0.97); }
+
+/* ---- Favorites Pane ---- */
+.fav-filter-wrap {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px 8px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+#fav-filter-bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  flex: 1;
+  min-width: 0;
+}
+#fav-filter-bar::-webkit-scrollbar { display: none; }
+
+.filter-pill {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 11.5px;
+  color: var(--text-2);
+  white-space: nowrap;
+  transition: background 0.14s, border-color 0.14s, color 0.14s;
+}
+
+.filter-pill:hover { background: var(--surface-2); color: var(--text-1); }
+
+.filter-pill.active {
+  background: var(--accent-dim);
+  border-color: rgba(255, 122, 127, 0.4);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---- 價格刷新按鈕 ---- */
+.fav-refresh-btn {
+  flex-shrink: 0;
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 11.5px;
+  color: var(--text-2);
+  white-space: nowrap;
+  transition: background 0.14s, color 0.14s;
+}
+.fav-refresh-btn:hover { background: var(--surface-2); color: var(--text-1); }
+.fav-refresh-btn:disabled { opacity: 0.5; cursor: default; }
+
+/* ---- 收藏頁價格列（展開狀態） ---- */
+.fav-price-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: rgba(255, 214, 10, 0.07);
+  border: 1px solid rgba(255, 214, 10, 0.18);
+  border-radius: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.fav-price-amount {
+  color: var(--text-1);
+  font-weight: 600;
+  flex: 1;
+  font-variant-numeric: tabular-nums;
+}
+.fav-price-per { color: var(--text-3); font-weight: 400; }
+.fav-price-date { color: var(--text-3); font-size: 11px; white-space: nowrap; }
+
+/* ---- 收藏列表摺疊行中的價格指示 ---- */
+.fav-price-indicator {
+  color: var(--gold);
+  font-size: 10.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---- 批次操作列 ---- */
+#fav-batch-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: rgba(255, 69, 58, 0.08);
+  border-bottom: 1px solid rgba(255, 69, 58, 0.18);
+  font-size: 12px;
+  color: var(--text-2);
+}
+.batch-delete-btn {
+  margin-left: auto;
+  padding: 4px 10px;
+  background: transparent;
+  border: 1px solid rgba(255, 69, 58, 0.35);
+  border-radius: 8px;
+  color: #FF453A;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+.batch-delete-btn:hover:not(:disabled) { background: rgba(255, 69, 58, 0.12); }
+.batch-delete-btn:disabled { opacity: 0.35; cursor: default; border-color: var(--border); color: var(--text-3); }
+
+/* ---- Favorites List ---- */
+#fav-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 16px;
+  max-height: 320px;
+}
+
+.fav-item {
+  border-bottom: 1px solid var(--border);
+  padding: 10px 0;
+}
+
+.fav-item:last-child { border-bottom: none; }
+
+.fav-item-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.fav-item-flag { font-size: 18px; flex-shrink: 0; }
+
+.fav-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.fav-item-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fav-item-meta {
+  font-size: 10.5px;
+  color: var(--text-3);
+  margin-top: 1px;
+}
+
+.fav-item-source {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--surface-2);
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+/* 比�? checkbox */
+.fav-compare-cb {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* 展�?詳�? */
+.fav-item-detail {
+  margin-top: 8px;
+  padding: 10px 12px;
+  background: var(--surface);
+  border-radius: var(--r-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.fav-detail-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+/* 四按鈕單列：📍 | 原始頁面 | Hotels | 🗑️ */
+.fav-action-row { flex-wrap: nowrap; align-items: stretch; }
+.fav-btn-icon { flex-shrink: 0; padding: 5px 8px; }
+.fav-btn-grow { flex: 1; text-align: center; }
+
+.fav-detail-btn {
+  padding: 5px 10px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--text-2);
+  transition: background 0.12s, color 0.12s;
+}
+.fav-detail-btn:hover { background: var(--surface); color: var(--text-1); }
+.fav-detail-btn.danger { color: #FF453A; border-color: rgba(255, 69, 58, 0.25); }
+.fav-detail-btn.danger:hover { background: rgba(255, 69, 58, 0.1); }
+.fav-link-btn { text-decoration: none; }
+
+.fav-input {
+  width: 100%;
+  padding: 5px 8px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text-1);
+  font-size: 12px;
+  outline: none;
+  transition: border-color 0.14s;
+}
+.fav-input:focus { border-color: var(--accent); }
+
+/* Checklist 網格 */
+.checklist-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.checklist-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 5px 2px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 10px;
+  color: var(--text-3);
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+  user-select: none;
+}
+
+.checklist-item .ck-icon { font-size: 16px; }
+.checklist-item .ck-label { font-size: 9px; line-height: 1.2; text-align: center; }
+
+.checklist-item.state-yes {
+  background: rgba(52, 199, 89, 0.12);
+  border-color: rgba(52, 199, 89, 0.35);
+  color: var(--success);
+}
+.checklist-item.state-no {
+  background: rgba(255, 69, 58, 0.1);
+  border-color: rgba(255, 69, 58, 0.25);
+  color: #FF453A;
+}
+
+/* ---- Favorites Actions ---- */
+#fav-actions {
+  display: flex;
+  gap: 6px;
+  padding: 10px 16px 12px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.action-btn {
+  flex: 1;
+  padding: 7px 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 11px;
+  color: var(--text-2);
+  text-align: center;
+  transition: background 0.14s, color 0.14s;
+}
+.action-btn:hover { background: var(--surface-2); color: var(--text-1); }
+
+/* ---- Compare Pane ---- */
+#pane-compare { padding: 0; }
+
+#compare-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  padding: 10px 12px;
+  max-height: 340px;
+}
+
+/* -- 橫�?比�???-- */
+.compare-card {
+  background: var(--surface);
+  border-radius: var(--r-sm);
+  padding: 8px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.compare-card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.compare-card-label {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--blue);
+  width: 16px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.compare-card-flag { font-size: 16px; flex-shrink: 0; }
+
+.compare-card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.compare-card-name {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-1);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.compare-card-source {
+  font-size: 9px;
+  color: var(--text-3);
+}
+
+.compare-card-score {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.compare-card-pin {
+  background: none;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: background 0.12s;
+}
+.compare-card-pin:hover { background: var(--surface-2); }
+
+.compare-card-checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 4px 0 2px;
+  border-top: 1px solid var(--border);
+}
+
+/* 只顯示用戶確認為「有」的 POI，pill 樣式 */
+.cmp-ck-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 7px;
+  border-radius: 20px;
+  background: var(--green-dim);
+  border: 1px solid rgba(48, 209, 88, 0.2);
+  font-size: 10px;
+  white-space: nowrap;
+}
+.cmp-ck-cell-label {
+  color: var(--text-2);
+  font-size: 9.5px;
+}
+
+.empty-hint {
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+
+/* ============================================================
+   P3: Trip Pills / Settings Btn / Radius / Transport
+   ============================================================ */
+
+/* ---- Settings button (in #country-row) ---- */
+.settings-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--text-3);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: var(--r-sm);
+  line-height: 1;
+  transition: color 0.14s, background 0.14s;
+}
+.settings-btn:hover {
+  color: var(--text-1);
+  background: var(--surface-2);
+}
+
+/* ---- Trip Type Bar ??2x3 網格 ---- */
+#trip-type-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+  padding: 10px 16px 0;
+  flex-shrink: 0;
+}
+
+.trip-pill {
+  padding: 6px 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 11.5px;
+  color: var(--text-2);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  transition: background 0.14s, border-color 0.14s, color 0.14s;
+}
+.trip-pill:hover {
+  background: var(--surface-2);
+  color: var(--text-1);
+}
+.trip-pill.active {
+  background: var(--accent-dim);
+  border-color: rgba(255, 122, 127, 0.45);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* ---- Section header with inline radius selector ---- */
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 9px;
+}
+.section-header .group-label { margin-bottom: 0; }
+
+.radius-wrap {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.radius-label {
+  font-size: 10.5px;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.radius-select {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  color: var(--text-2);
+  font-size: 11.5px;
+  padding: 2px 6px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.14s, color 0.14s;
+}
+.radius-select:focus {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: var(--text-1);
+}
+
+/* ---- Transport section ???�收??---- */
+#section-transport {
+  border-top: 1px solid var(--border);
+  padding-top: 0;
+}
+
+.transport-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: opacity 0.14s;
+}
+.transport-toggle:hover { opacity: 0.8; }
+.transport-toggle .group-label {
+  color: var(--green);
+  margin-bottom: 0;
+}
+.transport-arrow {
+  font-size: 9px;
+  color: var(--text-3);
+  transition: transform 0.2s;
+}
+.transport-arrow.open { transform: rotate(90deg); }
+
+.transport-body {
+  margin-top: 4px;
+}
+
+/* ============================================================
+   P4: ?�覽歷史 / Footer ?��?
+   ============================================================ */
+
+/* ---- History Section ---- */
+#history-section {
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.history-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
+  padding: 10px 16px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 11.5px;
+  color: var(--text-3);
+  text-align: left;
+  transition: color 0.14s, background 0.14s;
+}
+.history-toggle:hover { background: var(--surface); color: var(--text-2); }
+
+.history-count {
+  background: var(--surface-2);
+  border-radius: 10px;
+  padding: 1px 6px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+.history-arrow {
+  margin-left: auto;
+  font-size: 9px;
+  color: var(--text-3);
+}
+
+#history-list {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 0 16px 4px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-2) transparent;
+}
+
+.history-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+}
+.history-item:last-child { border-bottom: none; }
+
+.history-flag { font-size: 16px; flex-shrink: 0; }
+
+.history-info {
+  flex: 1;
+  min-width: 0;
+}
+.history-name {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--text-1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.history-meta { font-size: 10px; color: var(--text-3); margin-top: 1px; }
+
+/* ---- Compare Action Bar ---- */
+.compare-action-bar {
+  display: flex;
+  gap: 6px;
+  padding: 4px 12px 8px;
+  flex-shrink: 0;
+}
+.share-copy-btn {
+  flex: 1;
+  padding: 7px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-2);
+  text-align: center;
+  transition: background 0.14s, color 0.14s, transform 0.1s;
+}
+.compare-fullpage-btn {
+  padding: 7px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--blue);
+  white-space: nowrap;
+  transition: background 0.14s, color 0.14s;
+}
+.compare-fullpage-btn:hover { background: var(--surface-2); }
+.share-copy-btn:hover { background: var(--surface-2); color: var(--text-1); }
+.share-copy-btn:active { transform: scale(0.97); }
+
+/* ---- Custom Name Input ---- */
+.fav-input-name { font-weight: 500; color: var(--text-1); }
+
+.history-map-btn {
+  background: none;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: var(--text-3);
+  flex-shrink: 0;
+  transition: color 0.12s, background 0.12s;
+}
+.history-map-btn:hover { color: var(--text-1); background: var(--surface-2); }
+
+.history-link-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  color: var(--text-3);
+  flex-shrink: 0;
+  text-decoration: none;
+  font-size: 13px;
+  transition: color 0.12s, background 0.12s;
+}
+.history-link-btn:hover { color: var(--text-1); background: var(--surface-2); }
+
+.history-empty { font-size: 11px; color: var(--text-3); padding: 8px 0; text-align: center; }
+
+#history-footer { padding: 6px 16px 10px; }
+.history-clear-btn {
+  width: 100%;
+  padding: 5px 8px;
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 11px;
+  color: #FF453A;
+  text-align: center;
+  transition: background 0.12s;
+}
+.history-clear-btn:hover { background: rgba(255, 69, 58, 0.08); }
+
+/* ---- Footer P4 已�?併至上方?�用規�? ---- */
+
+
+/* ============================================================
+   各 Tab Pane 環境色暈（極淡頂部漸層，強化空間識別感）
+   ============================================================ */
+
+/* 搜尋 → 珊瑚暈 */
+#pane-search {
+  background: linear-gradient(180deg, rgba(255, 122, 127, 0.05) 0%, transparent 56px),
+              var(--bg);
+}
+
+/* 收藏 → 金色暈 */
+#pane-favorites {
+  background: linear-gradient(180deg, rgba(255, 214, 10, 0.06) 0%, transparent 56px),
+              var(--bg);
+}
+
+/* 比較 → 藍色暈 */
+#pane-compare {
+  background: linear-gradient(180deg, rgba(90, 200, 250, 0.05) 0%, transparent 56px),
+              var(--bg);
+}
+
+/* 收藏 filter pill — 金色主題 */
+#tab-favorites.active {
+  color: var(--gold);
+  border-bottom-color: var(--gold);
+}
+/* ?��? filter pill */
+#pane-favorites .filter-pill.active {
+  background: var(--gold-dim);
+  border-color: rgba(255, 214, 10, 0.4);
+  color: var(--gold);
+}
+/* ?��? section label */
+#pane-favorites .fav-detail-btn:not(.danger):hover {
+  border-color: rgba(255, 214, 10, 0.3);
+}
+
+/* 比�? tab ???�色 */
+#tab-compare.active {
+  color: var(--blue);
+  border-bottom-color: var(--blue);
+}
+
+/* 交�?section label ??綠色 */
+/* (已在 transport-toggle 裡設�?color: var(--green)) */
+.transport-toggle .group-label { color: var(--green); }
+
+/* ============================================================
+   ?�段評�?
+   ============================================================ */
+.fav-score {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold);
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+
+/* ============================================================
+   快速�?�?Chips（Task 8�?
+   ============================================================ */
+.fav-tag-suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  min-height: 0; /* 空time 不�?空�? */
+}
+
+.tag-chip {
+  padding: 3px 8px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 10.5px;
+  color: var(--text-2);
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.tag-chip:hover { background: var(--bg); color: var(--text-1); }
+.tag-chip.active {
+  background: var(--gold-dim);
+  border-color: rgba(255, 214, 10, 0.3);
+  color: var(--gold);
+}
+

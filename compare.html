@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayScope 全頁比較</title>
+  <link rel="stylesheet" href="compare.css">
+</head>
+<body>
+  <div id="app">
+
+    <header id="cmp-header">
+      <button id="btn-back" class="back-btn">←</button>
+      <span id="cmp-title">⚖️ 房源比較</span>
+      <span id="cmp-subtitle" class="cmp-subtitle"></span>
+    </header>
+
+    <!-- 距離資訊列 + 全部顯示於地圖 -->
+    <div id="distance-bar"></div>
+    <div id="maps-all-bar">
+      <button id="btn-maps-all" class="maps-all-btn">🗺️ 在 Google Maps 查看全部房源位置</button>
+    </div>
+
+    <!-- 比較表格主體 -->
+    <div id="cmp-grid-wrap">
+      <div id="cmp-grid"></div>
+    </div>
+
+    <!-- 空狀態 -->
+    <div id="cmp-empty" class="hidden">
+      <div class="empty-box">
+        <div class="empty-icon">⚖️</div>
+        <p>請先在 Popup 收藏頁勾選 2–3 筆房源，再點擊全頁比較</p>
+        <button id="btn-close-empty" class="close-btn">關閉</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="i18n/locales.js"></script>
+  <script src="lib/storage.js"></script>
+  <script src="compare.js"></script>
+</body>
+</html>

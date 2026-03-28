@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayScope</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header -->
+    <header id="header">
+      <img id="header-icon" src="imag/icon32.png" alt="StayScope" width="22" height="22" style="vertical-align:middle;border-radius:4px;">
+      <span id="header-title">StayScope</span>
+      <button id="btn-settings" class="settings-btn" title="設定">⚙️</button>
+    </header>
+
+    <!-- 頁籤列 -->
+    <nav id="tab-bar">
+      <button class="tab-btn active" data-tab="search"    id="tab-search">🔍 搜尋</button>
+      <button class="tab-btn"        data-tab="favorites" id="tab-favorites">⭐ 收藏</button>
+      <button class="tab-btn"        data-tab="compare"   id="tab-compare">⚖️ 比較</button>
+    </nav>
+
+    <!-- ===== 頁籤：搜尋 ===== -->
+    <div id="pane-search" class="tab-pane active">
+
+      <!-- 狀態列 + 房源資訊 -->
+      <div id="info-section">
+        <div id="status-bar" class="state-detecting">
+          <div class="status-main">
+            <span id="status-dot"></span>
+            <span id="status-text">偵測房源座標中...</span>
+          </div>
+          <div id="detected-name" class="detected-name hidden"></div>
+        </div>
+
+        <div id="property-info" class="hidden">
+          <div id="country-row">
+            <span id="country-flag">🌍</span>
+            <span id="country-name"></span>
+            <span id="source-badge" class="source-badge"></span>
+          </div>
+          <!-- 座標行 + 房源釘選按鈕 -->
+          <button id="btn-pin" class="pin-btn" title="在 Google Maps 查看房源位置">
+            <span class="pin-icon">📍</span>
+            <span id="coord-lat">--</span><span class="coord-sep">, </span><span id="coord-lng">--</span>
+            <span class="pin-badge" id="label-pin-badge">在地圖查看房源</span>
+          </button>
+          <!-- 價格展示列（提取得到時顯示） -->
+          <div id="price-row" class="price-row hidden"></div>
+          <!-- 收藏切換 + Google Hotels 比價 -->
+          <div class="save-row">
+            <button id="btn-save" class="save-btn">⭐ <span id="label-save">收藏</span></button>
+            <button id="btn-hotels" class="hotels-btn hidden" title="Google Hotels">🏨 <span id="label-hotels">比價</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 搜尋區塊 -->
+      <div id="search-sections" class="hidden">
+
+        <!-- 旅遊類型 pill 切換器 -->
+        <div id="trip-type-bar">
+          <button class="trip-pill" data-trip="backpacker">🎒 背包客</button>
+          <button class="trip-pill" data-trip="family">👨‍👩‍👧 親子</button>
+          <button class="trip-pill" data-trip="couple">💑 情侶</button>
+          <button class="trip-pill" data-trip="business">💼 商務</button>
+          <button class="trip-pill" data-trip="senior">👴 銀髮</button>
+          <button class="trip-pill active" data-trip="custom">⚙️ 自訂</button>
+        </div>
+
+        <div id="map-center-hint" class="map-hint"><span id="label-map-center">搜尋地圖已以房源為中心</span></div>
+
+        <!-- 自訂類別（由 JS 動態產生） -->
+        <section class="group hidden" id="section-custom">
+          <h3 class="group-label" id="label-custom">⚙️ 自訂類別</h3>
+          <div class="cat-grid" id="custom-cat-grid"></div>
+        </section>
+
+        <!-- 家庭套餐（自訂模式預設顯示） -->
+        <section class="group featured" id="section-bundle">
+          <h3 class="group-label" id="label-bundle">家庭套餐</h3>
+          <div class="bundle-grid">
+            <button class="btn-bundle" id="btn-daily">
+              <span class="bundle-icon">🛒</span>
+              <span class="bundle-name" id="label-daily">日常必需</span>
+              <span class="bundle-hint" id="hint-daily">超市 + 藥局</span>
+            </button>
+            <button class="btn-bundle" id="btn-family">
+              <span class="bundle-icon">🌳</span>
+              <span class="bundle-name" id="label-family">親子活動</span>
+              <span class="bundle-hint" id="hint-family">公園 + 遊樂場</span>
+            </button>
+            <button class="btn-bundle btn-bundle-safety" id="btn-safety">
+              <span class="bundle-icon">🛡️</span>
+              <span class="bundle-name" id="label-safety">安全防身</span>
+              <span class="bundle-hint" id="hint-safety">警局 + 醫院 + 藥局</span>
+            </button>
+          </div>
+        </section>
+
+        <!-- 單一類別 -->
+        <section class="group" id="section-cats">
+          <div class="section-header">
+            <h3 class="group-label" id="label-individual">單一類別</h3>
+            <!-- 搜尋半徑 -->
+            <div class="radius-wrap">
+              <label class="radius-label" id="label-radius">半徑</label>
+              <select id="select-radius" class="radius-select">
+                <option value="17">500m</option>
+                <option value="15" selected>1km</option>
+                <option value="14">2km</option>
+                <option value="13">5km</option>
+              </select>
+            </div>
+          </div>
+          <div class="cat-grid" id="cat-grid">
+            <button class="btn-cat" data-key="supermarket" id="btn-supermarket">🛒 超市</button>
+            <button class="btn-cat" data-key="pharmacy"    id="btn-pharmacy">💊 藥局</button>
+            <button class="btn-cat" data-key="restaurant"  id="btn-restaurant">🍽️ 餐廳</button>
+            <button class="btn-cat" data-key="park"        id="btn-park">🌳 公園</button>
+            <button class="btn-cat" data-key="convenience" id="btn-convenience">🏪 便利</button>
+            <button class="btn-cat" data-key="transit"     id="btn-transit">🚇 地鐵</button>
+            <button class="btn-cat" data-key="hospital"    id="btn-hospital">🏥 醫院</button>
+            <button class="btn-cat" data-key="cafe"        id="btn-cafe">☕️ 咊啡</button>
+            <button class="btn-cat" data-key="laundry"     id="btn-laundry">� 洗衣</button>
+          </div>
+        </section>
+
+        <!-- 交通區塊（預設收折） -->
+        <section class="group" id="section-transport">
+          <button class="transport-toggle" id="btn-transport-toggle">
+            <h3 class="group-label" id="label-transport">交通</h3>
+            <span class="transport-arrow" id="transport-arrow">▶</span>
+          </button>
+          <div class="cat-grid transport-body hidden" id="transport-body">
+            <button class="btn-cat" data-key="transit"  id="btn-metro">🚇 地鐵</button>
+            <button class="btn-cat" data-key="bus"      id="btn-bus">🚌 公車</button>
+            <button class="btn-cat" data-key="airport"  id="btn-airport">✈️ 機場</button>
+            <button class="btn-cat" data-key="rental"   id="btn-rental">🚗 租車</button>
+            <button class="btn-cat" data-key="bike"     id="btn-bike">🚲 共享單車</button>
+            <button class="btn-cat" data-key="taxi"     id="btn-taxi">🚕 計程車</button>
+          </div>
+        </section>
+
+        <!-- 景點區塊（預設收折） -->
+        <section class="group" id="section-attractions">
+          <button class="transport-toggle" id="btn-attractions-toggle">
+            <h3 class="group-label" id="label-attractions">景點搜尋</h3>
+            <span class="transport-arrow" id="attractions-arrow">▶</span>
+          </button>
+          <div class="cat-grid transport-body hidden" id="attractions-body">
+            <button class="btn-cat" data-key="temple"       id="btn-temple">⛩️ 廟宇</button>
+            <button class="btn-cat" data-key="museum"       id="btn-museum">🏗️ 博物館</button>
+            <button class="btn-cat" data-key="mall"         id="btn-mall">🛒 購物中心</button>
+            <button class="btn-cat" data-key="botanical"    id="btn-botanical">🌿 植物園</button>
+            <button class="btn-cat" data-key="night_market" id="btn-night-market">🌙 夕市</button>
+            <button class="btn-cat" data-key="zoo"          id="btn-zoo">🦁 動物園</button>
+            <button class="btn-cat" data-key="beach"        id="btn-beach">🏖️ 海灘</button>
+            <button class="btn-cat" data-key="art_gallery"  id="btn-art-gallery">🎨 美術館</button>
+            <button class="btn-cat" data-key="stationery"   id="btn-stationery">✏️ 文具店</button>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- 非房源頁面 -->
+      <div id="not-listing" class="hidden">
+        <div class="empty-state">
+          <div class="empty-icon">🏠</div>
+          <p id="label-not-listing">請前往 Airbnb / Booking / Agoda / VRBO / Trip.com 房源頁面使用</p>
+          <div class="platform-hint">
+            <span class="ph-badge ph-airbnb">Airbnb</span>
+            <span class="ph-badge ph-booking">Booking</span>
+            <span class="ph-badge ph-agoda">Agoda</span>
+            <span class="ph-badge ph-vrbo">VRBO</span>
+            <span class="ph-badge ph-trip">Trip.com</span>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /pane-search -->
+
+    <!-- ===== 頁籤：收藏 ===== -->
+    <div id="pane-favorites" class="tab-pane">
+
+      <!-- 國家篩選器 pills + 更新按鈕 -->
+      <div class="fav-filter-wrap">
+        <div id="fav-filter-bar">
+          <button class="filter-pill active" data-country="ALL" id="fav-pill-all">全部</button>
+          <!-- 動態生成的國家 pill 插入此處 -->
+        </div>
+        <button id="btn-refresh-prices" class="fav-refresh-btn" title="更新所有收藏價格">🔄 <span id="label-refresh-prices">更新價格</span></button>
+      </div>
+
+      <!-- 批次操作列 -->
+      <div id="fav-batch-bar" class="hidden">
+        <span id="fav-batch-count"></span>
+        <button id="btn-batch-delete" class="batch-delete-btn" disabled>🗑️ <span id="label-batch-delete">刪除已選</span></button>
+      </div>
+
+      <!-- 收藏列表 -->
+      <div id="fav-list"></div>
+
+      <!-- 空狀態 -->
+      <div id="fav-empty" class="hidden">
+        <div class="empty-state">
+          <div class="empty-icon">⭐</div>
+          <p id="label-fav-empty">尚無收藏房源</p>
+          <p id="label-fav-empty-hint" class="empty-hint">在搜尋頁點擊 ⭐ 收藏目前房源</p>
+        </div>
+      </div>
+
+      <!-- 匯出 / 匯入 -->
+      <div id="fav-actions">
+        <button id="btn-export" class="action-btn">📤 <span id="label-export">匯出 JSON</span></button>
+        <button id="btn-import" class="action-btn">📥 <span id="label-import">匯入 JSON</span></button>
+        <input type="file" id="import-file-input" accept=".json" class="hidden">
+      </div>
+      <!-- 最近瀏覽歷史 -->
+      <div id="history-section">
+        <button id="btn-history-toggle" class="history-toggle">
+          <span>🕒 最近瀏覽</span>
+          <span id="history-count" class="history-count">0</span>
+          <span id="history-arrow" class="history-arrow">▶</span>
+        </button>
+        <div id="history-list" class="hidden"></div>
+        <div id="history-footer" class="hidden">
+          <button id="btn-clear-history" class="history-clear-btn">🗑️ 清除歷史</button>
+        </div>
+      </div>
+    </div><!-- /pane-favorites -->
+
+    <!-- ===== 頁籤：比較 ===== -->
+    <div id="pane-compare" class="tab-pane">
+
+      <!-- 比較結果 -->
+      <div id="compare-grid"></div>
+
+      <!-- 比較操作列 -->
+      <div id="compare-action-bar" class="compare-action-bar hidden">
+        <button id="btn-share-copy" class="share-copy-btn">📋 <span id="label-share-copy">一鍵分享比較結果</span></button>
+        <button id="btn-compare-fullpage" class="compare-fullpage-btn" title="全頁比較">⚖️ <span id="label-fullpage">全頁比較</span></button>
+      </div>
+
+      <!-- 空狀態 -->
+      <div id="compare-empty">
+        <div class="empty-state">
+          <div class="empty-icon">⚖️</div>
+          <p id="label-compare-empty">請在收藏頁選取 2–5 筆房源</p>
+        </div>
+      </div>
+
+    </div><!-- /pane-compare -->
+
+    <!-- 底部品牌條 -->
+    <footer id="footer">
+      <a id="footer-brand" class="footer-brand" href="#" title="關於 StayScope">
+        <span class="footer-brand-main" id="footer-brand-main">關於 StayScope</span>
+        <span class="footer-brand-sub" id="footer-brand-sub">使用說明 · 意見回饋</span>
+      </a>
+    </footer>
+
+  </div>
+
+  <script src="i18n/locales.js"></script>
+  <script src="lib/storage.js"></script>
+  <script src="popup-trip.js"></script>
+  <script src="popup-history.js"></script>
+  <script src="popup-favorites.js"></script>
+  <script src="popup-compare.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

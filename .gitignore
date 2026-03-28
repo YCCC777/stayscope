@@ -1,0 +1,22 @@
+# Development notes (not for public)
+CLAUDE.md
+plan2.txt
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Chrome Extension build artifacts
+*.crx
+*.pem
+*.zip
+
+# Secrets
+.env
+*.key

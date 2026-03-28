@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StayScope — Privacy Policy</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #1C1C1E;
+      color: #F5F5F7;
+      line-height: 1.7;
+      padding: 48px 24px;
+    }
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+    .brand-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FF7A7F;
+    }
+    .brand-sub {
+      font-size: 13px;
+      color: #8E8E93;
+    }
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .updated {
+      font-size: 13px;
+      color: #8E8E93;
+      margin-bottom: 40px;
+    }
+    h2 {
+      font-size: 17px;
+      font-weight: 600;
+      color: #FF7A7F;
+      margin: 32px 0 12px;
+    }
+    p {
+      font-size: 15px;
+      color: #C0C0C4;
+      margin-bottom: 12px;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 12px;
+    }
+    ul li {
+      font-size: 15px;
+      color: #C0C0C4;
+      padding: 6px 0 6px 20px;
+      position: relative;
+    }
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #FF7A7F;
+    }
+    .highlight-box {
+      background: #2C2C2E;
+      border: 1px solid rgba(255,122,127,0.25);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .highlight-box p {
+      margin-bottom: 0;
+      color: #F5F5F7;
+      font-weight: 500;
+    }
+    a { color: #5AC8FA; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    footer {
+      margin-top: 60px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      font-size: 13px;
+      color: #8E8E93;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <div class="brand">
+      <div>
+        <div class="brand-name">StayScope</div>
+        <div class="brand-sub">by Risa Studio</div>
+      </div>
+    </div>
+
+    <h1>Privacy Policy</h1>
+    <div class="updated">Last updated: March 2026</div>
+
+    <div class="highlight-box">
+      <p>StayScope does not collect, store on any server, or transmit any personal data. All information stays on your own device and Chrome account — never on our servers, because we don't have any.</p>
+    </div>
+
+    <h2>What data StayScope reads</h2>
+    <p>When you visit a supported accommodation page (Airbnb, Booking.com, Agoda, VRBO, Trip.com), the extension reads the following information from the page:</p>
+    <ul>
+      <li>GPS coordinates (latitude / longitude) of the listed property</li>
+      <li>Property name and country code</li>
+      <li>Check-in / check-out dates and displayed price (from the page URL or DOM)</li>
+    </ul>
+    <p>This data is read from the page's publicly available DOM and embedded scripts — the same content visible to any website visitor.</p>
+
+    <h2>Where data is stored</h2>
+    <p>All data is stored exclusively in your own browser:</p>
+    <ul>
+      <li><strong>chrome.storage.sync</strong> — synced to your personal Google account across your own Chrome devices (subject to Chrome's 100 KB quota limit)</li>
+      <li><strong>chrome.storage.local</strong> — stored locally on your device for larger data (price history logs)</li>
+    </ul>
+    <p>Neither Risa Studio nor any third party has access to this data. We operate no servers, databases, or analytics services.</p>
+
+    <h2>External requests</h2>
+    <p>StayScope does not make any external network requests on its own. The only network activity is:</p>
+    <ul>
+      <li>Opening Google Maps / Google Search tabs in your browser — initiated by you when you click a search button</li>
+      <li>Opening partner booking comparison pages — initiated by you</li>
+    </ul>
+    <p>These are standard browser tab navigations, identical to typing a URL in the address bar.</p>
+
+    <h2>Permissions explained</h2>
+    <p>The extension requests the following Chrome permissions:</p>
+    <ul>
+      <li><strong>activeTab / tabs</strong> — to read the URL of your current tab and inject the coordinate-extraction script</li>
+      <li><strong>scripting</strong> — to run the extraction script in the context of supported accommodation pages (necessary to read window globals like <code>__NEXT_DATA__</code> and <code>__APOLLO_STATE__</code> that contain property coordinates)</li>
+      <li><strong>storage</strong> — to save your favorites and price history in <code>chrome.storage.sync</code> / <code>chrome.storage.local</code></li>
+      <li><strong>host_permissions</strong> (Airbnb, Booking.com, Agoda, VRBO, Trip.com domains) — required by Chrome to inject the extraction script on those specific domains; no data from these sites is sent anywhere</li>
+    </ul>
+
+    <h2>No tracking, no analytics</h2>
+    <p>StayScope contains no analytics libraries, no crash-reporting services, no advertising SDKs, and no telemetry of any kind. We never know how many people use the extension or what searches they perform.</p>
+
+    <h2>Children's privacy</h2>
+    <p>StayScope does not knowingly collect any information from anyone. Because no data ever leaves your device, there is no applicable concern for users of any age.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>If the privacy practices of StayScope change (for example, adding a new data source), this policy will be updated and the extension version will be incremented accordingly.</p>
+
+    <h2>Contact</h2>
+    <p>Questions or concerns? Reach out via <a href="https://ko-fi.com/risa_studio" target="_blank" rel="noopener">ko-fi.com/risa_studio</a>.</p>
+
+    <footer>
+      &copy; 2026 Risa Studio · StayScope Chrome Extension
+    </footer>
+
+  </div>
+</body>
+</html>

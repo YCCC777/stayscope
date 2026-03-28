@@ -1,0 +1,100 @@
+{
+  "manifest_version": 3,
+  "name": "StayScope",
+  "short_name": "StayScope",
+  "version": "1.3.0",
+  "author": "Risa Studio",
+  "description": "一鍵搜尋 Airbnb、Booking、Agoda、VRBO、Trip.com 房源周邊超市、餐廳、交通等地點，支援 12 語系",
+  "homepage_url": "https://ko-fi.com/risa_studio",
+  "permissions": [
+    "activeTab",
+    "scripting",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "https://www.airbnb.com/*",
+    "https://www.airbnb.tw/*",
+    "https://www.airbnb.co.jp/*",
+    "https://www.airbnb.com.au/*",
+    "https://www.airbnb.co.uk/*",
+    "https://www.airbnb.com.sg/*",
+    "https://www.airbnb.ca/*",
+    "https://www.airbnb.fr/*",
+    "https://www.airbnb.de/*",
+    "https://www.airbnb.it/*",
+    "https://www.airbnb.es/*",
+    "https://www.airbnb.co.kr/*",
+    "https://www.booking.com/*",
+    "https://www.agoda.com/*",
+    "https://*.trip.com/*",
+    "https://www.vrbo.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.airbnb.com/rooms/*",
+        "https://www.airbnb.tw/rooms/*",
+        "https://www.airbnb.co.jp/rooms/*",
+        "https://www.airbnb.com.au/rooms/*",
+        "https://www.airbnb.co.uk/rooms/*",
+        "https://www.airbnb.com.sg/rooms/*",
+        "https://www.airbnb.ca/rooms/*",
+        "https://www.airbnb.fr/rooms/*",
+        "https://www.airbnb.de/rooms/*",
+        "https://www.airbnb.it/rooms/*",
+        "https://www.airbnb.es/rooms/*",
+        "https://www.airbnb.co.kr/rooms/*"
+      ],
+      "js": ["extractors/base.js", "extractors/airbnb.js", "content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.booking.com/hotel/*"
+      ],
+      "js": ["extractors/base.js", "extractors/booking.js", "content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.agoda.com/*/hotel/*"
+      ],
+      "js": ["extractors/base.js", "extractors/agoda.js", "content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://*.trip.com/hotels/*"
+      ],
+      "js": ["extractors/base.js", "extractors/trip.js", "content.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://www.vrbo.com/*"
+      ],
+      "js": ["extractors/base.js", "extractors/vrbo.js", "content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "StayScope",
+    "default_icon": {
+      "16": "imag/icon16.png",
+      "32": "imag/icon32.png",
+      "48": "imag/icon48.png",
+      "128": "imag/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "imag/icon16.png",
+    "32": "imag/icon32.png",
+    "48": "imag/icon48.png",
+    "128": "imag/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  }
+}

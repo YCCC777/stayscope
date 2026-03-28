@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support StayScope ☕</title>
+  <link rel="stylesheet" href="donate.css">
+</head>
+<body>
+  <div id="page">
+
+    <!-- Hero -->
+    <section id="hero">
+      <div class="hero-logo"><img src="imag/Stayscope.png" alt="StayScope" width="80" height="80" style="border-radius:16px;"></div>
+      <h1 class="hero-title">StayScope</h1>
+      <p class="hero-tagline" id="d-tagline"><span id="d-tagline-text"></span></p>
+    </section>
+
+    <!-- 功能亮點 -->
+    <section class="content-section">
+      <h2 class="section-heading" id="d-features"></h2>
+      <div class="feature-grid">
+        <div class="feature-card"><span class="fc-icon">📍</span><span class="fc-text" id="d-feat-detect"></span></div>
+        <div class="feature-card"><span class="fc-icon">🌍</span><span class="fc-text" id="d-feat-keyword"></span></div>
+        <div class="feature-card"><span class="fc-icon">⭐</span><span class="fc-text" id="d-feat-fav"></span></div>
+        <div class="feature-card"><span class="fc-icon">🎒</span><span class="fc-text" id="d-feat-trip"></span></div>
+        <div class="feature-card"><span class="fc-icon">🌐</span><span class="fc-text" id="d-feat-lang"></span></div>
+        <div class="feature-card"><span class="fc-icon">🚇</span><span class="fc-text" id="d-feat-transport"></span></div>
+      </div>
+    </section>
+
+    <!-- 使用說明 -->
+    <section class="content-section">
+      <h2 class="section-heading" id="d-usage-title"></h2>
+      <ol class="usage-list">
+        <li id="d-usage-1"></li>
+        <li id="d-usage-2"></li>
+        <li id="d-usage-3"></li>
+        <li id="d-usage-4"></li>
+      </ol>
+      <a id="d-feedback-btn" class="feedback-btn" href="https://forms.gle/PLACEHOLDER_BUG_REPORT" target="_blank" rel="noopener"></a>
+    </section>
+
+    <!-- 關於開發者 -->
+    <section class="content-section about-section">
+      <h2 class="section-heading" id="d-about"></h2>
+      <p class="about-text" id="d-about-text"></p>
+      <div class="about-badge">
+        <span id="d-about-badge"></span>
+      </div>
+    </section>
+
+    <!-- 斗內區 -->
+    <section class="content-section donate-section" id="donate-area">
+      <h2 class="section-heading" id="d-support"></h2>
+      <p class="donate-desc" id="d-desc"></p>
+
+      <div class="qr-grid qr-grid-2">
+
+        <!-- Ko-fi -->
+        <div class="qr-card" id="qr-kofi">
+          <a href="https://ko-fi.com/risa_studio" target="_blank" rel="noopener" class="qr-img-link">
+            <img src="imag/kofi-qr.png" alt="Ko-fi QR" class="qr-img"
+                 onerror="this.style.display='none';this.nextSibling.style.display='flex'">
+            <div class="qr-placeholder" style="display:none"><span>☕</span></div>
+          </a>
+          <div class="qr-label">Ko-fi</div>
+          <a class="qr-link" href="https://ko-fi.com/risa_studio" id="link-kofi" target="_blank" rel="noopener">ko-fi.com/risa_studio</a>
+        </div>
+
+        <!-- 街口支付 -->
+        <div class="qr-card" id="qr-jkopay">
+          <div class="qr-placeholder" style="opacity:0.35"><span>💳</span></div>
+          <div class="qr-label" id="d-jkopay-label"></div>
+          <span class="qr-link" id="d-jkopay-link"></span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- 更新日誌 -->
+    <section class="content-section">
+      <h2 class="section-heading" id="d-changelog"></h2>
+      <div class="changelog">
+        <div class="cl-item">
+          <span class="cl-ver">v1.3</span>
+          <div class="cl-body">
+            <div class="cl-title">VRBO &amp; Trip.com + Price Tracking</div>
+            <ul class="cl-list">
+              <li>VRBO &amp; Trip.com extractor</li>
+              <li>Price tracking with trend badge</li>
+              <li>Attractions bundle (7 POIs)</li>
+              <li>UI dark-mode polish</li>
+              <li>12-language i18n complete</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-item">
+          <span class="cl-ver">v1.2</span>
+          <div class="cl-body">
+            <div class="cl-title">Phase 3 — Trip Types &amp; i18n</div>
+            <ul class="cl-list">
+              <li>6 trip-type pill presets</li>
+              <li>Search radius (500m–5km)</li>
+              <li>Transport section</li>
+              <li>12 interface languages</li>
+              <li>Full settings page</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-item">
+          <span class="cl-ver">v1.1</span>
+          <div class="cl-body">
+            <div class="cl-title">Phase 2 — Favorites &amp; Compare</div>
+            <ul class="cl-list">
+              <li>3-tab layout</li>
+              <li>Country filter, tags, notes</li>
+              <li>Favorites export/import JSON</li>
+              <li>Tag &amp; checklist system</li>
+            </ul>
+          </div>
+        </div>
+        <div class="cl-item">
+          <span class="cl-ver">v1.0</span>
+          <div class="cl-body">
+            <div class="cl-title">Phase 1 — Multi-platform</div>
+            <ul class="cl-list">
+              <li>Booking.com, Agoda support</li>
+              <li>Modular architecture</li>
+              <li>20+ country keywords</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer id="donate-footer">
+      <button id="btn-close" class="close-btn" id-text="d-close"></button>
+      <span class="footer-copy">StayScope v1.3.0 · Made by Risa Studio</span>
+    </footer>
+
+  </div>
+
+  <script src="i18n/locales.js"></script>
+  <script src="donate.js"></script>
+</body>
+</html>
